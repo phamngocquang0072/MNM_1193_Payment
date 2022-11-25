@@ -1,0 +1,138 @@
+﻿
+@model PaymentRecordCreateViewModel
+
+@{
+	ViewBag.Title = "Create Payment Record";
+}
+
+<div class="content container-fluid">
+
+	<!-- Page Header -->
+	<div class="page-header">
+		<div class="row">
+			<div class="col">
+				<h3 class="page-title">Payment Record</h3>
+				<ul class="breadcrumb">
+					<li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Dashboard</a></li>
+					<li class="breadcrumb-item active">Create Payment Record</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<!-- /Page Header -->
+
+	<div class="row">
+		<div class="col-md-12">
+			<div class="card mb-0">
+				<div class="card-header">
+					<h4 class="card-title mb-0">Create Payment Record</h4>
+				</div>
+				<div class="card-body">
+					<form method="post" asp-action="Create" enctype="multipart/form-data">
+						<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+						<div class="form-row">
+							<div class="form-group col-md-2">
+								<label asp-for="EmployeeId"></label>
+							</div>
+							<div class="form-group col-md-3">
+								<select asp-items="Model.EmployeeList" asp-for="EmployeeId" class="form-control">
+									<option value="">-- Select Employee --</option>
+								</select>
+								<span asp-validation-for="EmployeeId" class="text-danger"></span>
+							</div>
+						</div>
+						<div class="form-row">
+							<div class="form-group col-md-2">
+								<label asp-for="MonthPay"></label>
+							</div>
+							<div class="form-group col-md-3">
+								<select asp-for="MonthPay" class="form-control">
+									<option selected value="">--Select Month--</option>
+									<option value="Janaury">Janaury</option>
+									<option value="February">February</option>
+									<option value="March">March</option>
+									<option value="April">April</option>
+									<option value="May">May</option>
+									<option value="June">June</option>
+									<option value="July">July</option>
+									<option value="August">August</option>
+									<option value="September">September</option>
+									<option value="October">October</option>
+									<option value="November">November</option>
+									<option value="December">December</option>
+								</select>
+								<span asp-validation-for="MonthPay" class="text-danger"></span>
+							</div>
+
+							<div class="col-md-2">
+							</div>
+
+							<div class="form-group col-md-2">
+								<label asp-for="TaxYearId"></label>
+							</div>
+							<div class="form-group col-md-3">
+								<select asp-items="Model.TaxYearList" asp-for="TaxYearId" class="form-control">
+									<option value="">-- Select Tax Year --</option>
+								</select>
+								<span asp-validation-for="TaxYearId" class="text-danger"></span>
+							</div>
+						</div>
+
+						<div class="form-row">
+							<div class="form-group col-md-2">
+								<label asp-for="DatePay"></label>
+							</div>
+							<div class="form-group col-md-3">
+								<input type="date" class="form-control" asp-for="DatePay" />
+								<span asp-validation-for="DatePay" class="text-danger"></span>
+							</div>
+							<div class="col-md-2">
+							</div>
+							<div class="form-group col-md-2">
+								<label asp-for="HourslyRate"></label>
+							</div>
+							<div class="form-group col-md-3">
+								<input type="number" class="form-control" asp-for="HourslyRate" />
+								<span asp-validation-for="HourslyRate" class="text-danger"></span>
+							</div>
+						</div>
+
+						<div class="form-row">
+							<div class="form-group col-md-2">
+								<label asp-for="HourlyWorked"></label>
+							</div>
+							<div class="form-group col-md-3">
+								<input type="number" class="form-control" asp-for="HourlyWorked" />
+								<span asp-validation-for="HourlyWorked" class="text-danger"></span>
+							</div>
+							<div class="col-md-2">
+							</div>
+							<div class="form-group col-md-2">
+								<label asp-for="ContractualHours"></label>
+							</div>
+							<div class="form-group col-md-3">
+								<input type="number" class="form-control" asp-for="ContractualHours" value="144" />
+								<span asp-validation-for="ContractualHours" class="text-danger"></span>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<button type="submit" class="btn btn-secondary btn-rounded float-left" style="margin-right:auto.7em">Submit</button>
+							<a asp-controller="Payment" asp-action="Index" class="btn btn-primary btn-rounded float-right" style="margin-right:auto.7em">Cancel</a>
+							<br />
+							<br />
+						</div>
+
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_validationScriptsPartial");
+    }
+}

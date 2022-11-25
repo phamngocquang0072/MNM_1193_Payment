@@ -1,0 +1,76 @@
+﻿
+@model IEnumerable<PaymentRecordIndexViewModel>
+
+@{
+	ViewBag.Title = "Payments";
+}
+
+<!-- Page Content -->
+<div class="content container-fluid">
+
+	<!-- Page Header -->
+	<div class="page-header">
+		<div class="row align-items-center">
+			<div class="col">
+				<h3 class="page-title">Payment</h3>
+				<ul class="breadcrumb">
+					<li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Dashboard</a></li>
+					<li class="breadcrumb-item active">Payment</li>
+				</ul>
+			</div>
+			<div class="col-auto float-right ml-auto">
+				<a asp-controller="Payment" asp-action="Create" class="btn add-btn"><i class="fa fa-plus"></i> Add PaymentRecord</a>
+			</div>
+		</div>
+	</div>
+	<!-- /Page Header -->
+
+	<div class="row">
+		<div class="col-md-12">
+			<div class="table-responsive">
+				<table class="table table-striped custom-table datatable">
+					<thead>
+						<tr>
+							<th>Employee</th>
+							<th class="text-nowrap">Pay Date</th>
+							<th class="text-nowrap">Month</th>
+							<th class="text-nowrap">Tax Year</th>
+							<th>Total Earnings</th>
+							<th>Total Deductions</th>
+							<th>Net Pay</th>
+							<th class="text-right no-sort">Action</th>
+						</tr>
+					</thead>
+					<tbody>
+						@foreach (var item in Model)
+						{
+							<tr style="color: #FFF">
+								<td>
+									<h2 class="table-avatar">
+										<a asp-controller="Employee" asp-action="Detail" asp-route-id="@item.Employee">@item.Employee.FullName </a>
+									</h2>
+								</td>
+								<td>@item.DatePay</td>
+								<td>@item.MonthPay</td>
+								<td>@item.TaxYear</td>
+								<td>@item.TotalEarnings</td>
+								<td>@item.TotalDeduction</td>
+								<td>@item.NetPayment</td>
+								<td class="text-right">
+									<div class="dropdown dropdown-action">
+										<a asp-controller="Payment" asp-action="Index" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
+										<div class="dropdown-menu dropdown-menu-right">
+											<a class="dropdown-item" asp-controller="Payment" asp-action="Detail" asp-route-id="@item.Id"><i class="fas fa-bars m-r-5"></i>Payslip</a>
+											<a class="dropdown-item" asp-controller="Payment" asp-action="Export" asp-route-id="@item.Id"><i class="fa fa-pencil m-r-5"></i> Edit</a>
+											<a class="dropdown-item" asp-controller="Payment" asp-action="Delete" asp-route-id="@item.Id"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
+										</div>
+									</div>
+								</td>
+							</tr>
+						}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
